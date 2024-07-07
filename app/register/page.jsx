@@ -1,8 +1,5 @@
 'use client'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { initializeApp } from "firebase/app";
-import app from "../config/firebaseConfig.js";
 import Pocketbase from "pocketbase";
 
 const pb = new Pocketbase('https://cib.pockethost.io/');
@@ -66,6 +63,10 @@ export default function RegisterPage() {
                     <div className="w-full flex justify-center">
                         <input className="bg-[#4A4A4A] w-1/2 font-mono p-2 rounded-lg mt-3" type="text" name="linkedin" placeholder="LinkedIn Link" value={linkedin} onChange={(e) => setLinkedin(e.target.value)} />
                     </div>
+                    {/* <select name="user_type" className="">
+                        <option value="student">Student</option>
+                        <option value="faculty">Faculty</option>
+                    </select> */}
                     <button className="mt-2 px-2 py-1" onClick={handleLogin}>Already have an account?</button>
                     <div>
                         <button className="border rounded-lg px-4 py-2 text-xl transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-opacity-50 hover:bg-white duration-300 mt-4" type="submit">Register</button>
