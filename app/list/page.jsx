@@ -2,7 +2,7 @@
 // pages/PostsPage.js
 import { useEffect, useState } from "react";
 import PocketBase from 'pocketbase';
-import NavBar from "../Components/NavBar";
+import NavBar from "../Components/NavBar.jsx";
 
 const pb = new PocketBase('https://cib.pockethost.io');
 
