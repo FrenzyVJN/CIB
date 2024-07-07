@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 
 import PocketBase from 'pocketbase';
+import { verify } from "crypto";
 
 const pb = new PocketBase('https://cib.pockethost.io');
 export default function NavBar (){
@@ -50,7 +51,7 @@ const variants = {
       variants={variants}
     >
       {/* <button className="bg-white w-10 h-10" onClick={() => setIsOpen(isOpen => !isOpen)} /> */}
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-2">
         <Link href='/' className="text-white text-2xl">
           Home
         </Link>
@@ -60,10 +61,13 @@ const variants = {
         <Link href="post" className="text-white text-2xl">
           Post Job
         </Link>
+        <Link href="profile" className="text-white text-2xl">
+          Profile
+        </Link>
         <div className="text-white text-2xl">
           Contact
         </div>
-        
+       
       </div>
     </motion.nav>
   </div>

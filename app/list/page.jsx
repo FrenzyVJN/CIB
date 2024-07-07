@@ -87,14 +87,14 @@ export default function PostsPage() {
                 </div>
                 <div className="flex flex-wrap justify-center gap-4">
                     {posts.map(post => (
-                        <div key={post.id} className="bg-gray-700 p-4 rounded-lg w-80">
+                        <div key={post.id} className="bg-gray-800 p-4 rounded-lg w-80">
                             <h3 className="text-xl font-semibold text-gray-400">{post.type}</h3>
                             <p className="text-gray-300 mt-5">{post.description}</p>
                             <p className="mt-2 text-gray-300">Contact: {post.author_contact}</p>
                             <p className="mt-2 text-gray-300">Author: {post.author}</p>
                             <p className="mt-2 text-gray-300">Applied: {post.applied_count}</p>
                             <button
-                                className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                className="mt-4 bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                                 onClick={() => handleApply(post.id, post.applied_count, post.applied_candidates)}
                             >
                                 Apply
