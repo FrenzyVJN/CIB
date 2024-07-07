@@ -40,6 +40,7 @@ const variants = {
         <div className="text-white text-2xl">
           Contact
         </div>
+        
       </div>
     </motion.nav>
   </div>
