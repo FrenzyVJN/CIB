@@ -4,8 +4,6 @@ import PocketBase from 'pocketbase';
 
 const pb = new PocketBase('https://cib.pockethost.io');
 
-
-
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-row p-4 md:pt-24">
