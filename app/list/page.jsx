@@ -1,8 +1,9 @@
 'use client'
 // pages/PostsPage.js
 import { useEffect, useState } from "react";
-import PocketBase from 'pocketbase';
 import NavBar from "../components/sidebar";
+
+import PocketBase from 'pocketbase';
 
 const pb = new PocketBase('https://cib.pockethost.io');
 
@@ -45,6 +46,7 @@ export default function PostsPage() {
             for (let key in candidates) {
                 if (candidates[key] === pb.authStore.model.email) {
                     console.log("You have already applied for this job");
+                    alert("You have already applied for this job");
                     return;
                 }
             }
@@ -65,6 +67,7 @@ export default function PostsPage() {
             try {
                 const record = await pb.collection('posts').update(postId, data);
                 console.log("Application successful:", record);
+                alert("Application successful");
             } catch (error) {
                 console.error("Failed to update post:", error);
                 // Handle error as needed
@@ -72,6 +75,7 @@ export default function PostsPage() {
     
         } else {
             console.log("Please verify your account to apply for the job");
+            alert("Please verify your account to apply for the job");
         }
     };
         return (

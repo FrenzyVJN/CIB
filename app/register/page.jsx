@@ -15,7 +15,9 @@ export default function RegisterPage() {
     const [mobileno, setMobileno] = useState("");
     const [linkedin, setLinkedin] = useState("");
     const [error, setError] = useState(null);
-
+    const handleLogin = () => {
+        window.open("/login", "_self");
+    };
     const handleRegister = async (e) => {
         e.preventDefault();
         const data = {
@@ -30,6 +32,11 @@ export default function RegisterPage() {
         console.log("Registering...");
         console.log(username, email, password, rollno, mobileno, linkedin);
         console.log("Registered successfully");
+        const login = await pb.collection('users').authWithPassword(email,
+            password,
+        );
+        console.log("Logged in successfully");
+        window.open("/", "_self");
         }
         catch(err){
             console.log(err);
@@ -59,6 +66,7 @@ export default function RegisterPage() {
                     <div className="w-full flex justify-center">
                         <input className="bg-[#4A4A4A] w-1/2 font-mono p-2 rounded-lg mt-3" type="text" name="linkedin" placeholder="LinkedIn Link" value={linkedin} onChange={(e) => setLinkedin(e.target.value)} />
                     </div>
+                    <button className="mt-2 px-2 py-1" onClick={handleLogin}>Already have an account?</button>
                     <div>
                         <button className="border rounded-lg px-4 py-2 text-xl transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-opacity-50 hover:bg-white duration-300 mt-4" type="submit">Register</button>
                     </div>

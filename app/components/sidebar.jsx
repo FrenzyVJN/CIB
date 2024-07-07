@@ -1,8 +1,31 @@
 'use client'
 import { motion } from "framer-motion"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from "next/link";
+
+import PocketBase from 'pocketbase';
+
+const pb = new PocketBase('https://cib.pockethost.io');
 export default function NavBar (){
+
+  useEffect(() => {
+    const onLoad = async () => {
+        try {
+        const authData = await pb.collection('users').authRefresh();
+        console.log("Logged in as:", authData);
+        console.log(pb.authStore.model.verified)
+        }
+        catch(err){
+            console.log("Not Logged in");
+            console.log(pb.authStore.isValid)
+        }
+        let stat = pb.authStore.isValid;
+        if (stat === false) {
+            window.open("/register", "_self");
+        }
+    };
+    onLoad();
+}, []);
   const [isOpen, setIsOpen] = useState(false)
 
 const variants = {
