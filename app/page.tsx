@@ -1,5 +1,5 @@
 import Image from "next/image";
-import NavBar from "./components/navbar";
+import NavBar from "./components/sidebar";
 import PocketBase from 'pocketbase';
 
 const pb = new PocketBase('https://cib.pockethost.io');
