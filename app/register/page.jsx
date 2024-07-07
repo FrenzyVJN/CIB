@@ -3,7 +3,9 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import app from "../config/firebaseConfig.js";
+import Pocketbase from "pocketbase";
 
+const pb = new Pocketbase('https://cib.pockethost.io/');
 // const app = initializeApp(firebaseConfig);
 export default function RegisterPage() {
     const [username, setUsername] = useState("");
@@ -16,18 +18,21 @@ export default function RegisterPage() {
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        
-        const auth = getAuth(app);
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-            console.log("User registered:", user);
-            // Optionally, you can add additional user data to Firestore or other databases here
-        } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error("Registration error:", errorCode, errorMessage);
-            setError(errorMessage);
+        const data = {
+            "username": username,
+            "email": email,
+            "password": password,
+            "passwordConfirm": password,
+            "name": username,
+        };
+        try{
+        const record = await pb.collection('users').create(data);
+        console.log("Registering...");
+        console.log(username, email, password, rollno, mobileno, linkedin);
+        console.log("Registered successfully");
+        }
+        catch(err){
+            console.log(err);
         }
     };
 

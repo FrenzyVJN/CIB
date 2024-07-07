@@ -1,9 +1,9 @@
 'use client'
 import { motion } from "framer-motion"
 import React, { useState } from 'react';
-
+import Link from "next/link";
 export default function NavBar (){
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
 
 const variants = {
   open: { opacity: 1, x: 0 },
@@ -11,20 +11,35 @@ const variants = {
 }
   return (
     <div className="bg-black">
-      <div className="h-40 w-40">
+      <div className="w-fit h-fit">
     {/* <motion.div className="h-40 w-40 bg-white"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
     /> */}
-  <button className="bg-white w-10 h-10" onClick={() => setIsOpen(isOpen => !isOpen)} />
+  <button className="bg-inherit w-10 h-10" onClick={() => setIsOpen(isOpen => !isOpen)}>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
+  </button>
     <motion.nav
       animate={isOpen ? "open" : "closed"}
       variants={variants}
     >
       {/* <button className="bg-white w-10 h-10" onClick={() => setIsOpen(isOpen => !isOpen)} /> */}
-      <div className="bg-white">
-        hello world
+      <div className="flex flex-col">
+        <Link href='/' className="text-white text-2xl">
+          Home
+        </Link>
+        <Link href="/list" className="text-white text-2xl">
+          Jobs
+        </Link>
+        <Link href="post" className="text-white text-2xl">
+          Post Job
+        </Link>
+        <div className="text-white text-2xl">
+          Contact
+        </div>
       </div>
     </motion.nav>
   </div>
