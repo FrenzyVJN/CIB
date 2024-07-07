@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import PocketBase from 'pocketbase';
-import NavBar from "../components/navbar.jsx";
+import NavBar from "../components/navbar";
 const pb = new PocketBase('https://cib.pockethost.io');
 
 

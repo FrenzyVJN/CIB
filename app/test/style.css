@@ -179,7 +179,7 @@ body {
   }
   
   button {
-    -webkit-appearance: button;
+    /* -webkit-appearance: button; */
     background: var(--accent);
     color: var(--background);
     border: none;
