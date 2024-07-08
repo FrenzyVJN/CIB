@@ -1,6 +1,4 @@
 'use client'
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import app from "../config/firebaseConfig.js";
 import { useState } from "react";
 import PocketBase from 'pocketbase';
 
