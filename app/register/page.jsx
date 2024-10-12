@@ -1,9 +1,13 @@
-'use client'
+'use client';
 import { useState } from "react";
 import Pocketbase from "pocketbase";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Select } from "@/components/ui/select";
 
 const pb = new Pocketbase('https://cib.pockethost.io/');
-// const app = initializeApp(firebaseConfig);
+
 export default function RegisterPage() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -11,73 +15,127 @@ export default function RegisterPage() {
     const [rollno, setRollno] = useState("");
     const [mobileno, setMobileno] = useState("");
     const [linkedin, setLinkedin] = useState("");
+    const [role, setRole] = useState("student"); // Default value for role
     const [error, setError] = useState(null);
+
     const handleLogin = () => {
         window.open("/login", "_self");
     };
+
     const handleRegister = async (e) => {
         e.preventDefault();
         const data = {
-            "username": username,
-            "email": email,
-            "password": password,
-            "passwordConfirm": password,
-            "roll_number" : rollno,
-            "mobile_number" : mobileno,
-            "linkedin" : linkedin,
-            "name": username,
-        };
-        try{
-        const record = await pb.collection('users').create(data);
-        console.log("Registering...");
-        console.log(username, email, password, rollno, mobileno, linkedin);
-        console.log("Registered successfully");
-        const login = await pb.collection('users').authWithPassword(email,
+            username,
+            email,
             password,
-        );
-        console.log("Logged in successfully");
-        window.open("/", "_self");
-        }
-        catch(err){
-            console.log(err);
+            passwordConfirm: password,
+            roll_number: rollno,
+            mobile_number: mobileno,
+            linkedin,
+            name: username,
+            role, // Include role in the data
+        };
+
+        try {
+            console.log("Registering...");
+            const record = await pb.collection('users').create(data);
+            console.log("Registered successfully");
+            await pb.collection('users').authWithPassword(email, password);
+            console.log("Logged in successfully");
+            window.open("/", "_self");
+        } catch (err) {
+            setError(err.message); // Set the error message if registration fails
+            console.error(err);
         }
     };
 
     return (
-        <main>
-            <div className="p-10">
-                <div className="font-mono text-6xl font-semibold flex justify-center">Register</div>
-                <form className="flex flex-col items-center rounded-lg mx-10 mt-12 p-3" onSubmit={handleRegister}>
-                    <div className="w-full flex justify-center">
-                        <input className="bg-[#4A4A4A] w-1/2 font-mono p-2 rounded-lg mt-3" type="text" name="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg rounded-lg">
+                <h3 className="text-2xl font-bold text-center">Register for an account</h3>
+                {error && <p className="text-red-500 text-center">{error}</p>}
+                <form onSubmit={handleRegister}>
+                    <div className="mt-4">
+                        <Label htmlFor="name">Name</Label>
+                        <Input
+                            type="text"
+                            placeholder="Name"
+                            id="name"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
                     </div>
-                    <div className="w-full flex justify-center">
-                        <input className="bg-[#4A4A4A] w-1/2 font-mono p-2 rounded-lg mt-3" type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <div className="mt-4">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                            type="email"
+                            placeholder="Email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
                     </div>
-                    <div className="w-full flex justify-center">
-                        <input className="bg-[#4A4A4A] w-1/2 font-mono p-2 rounded-lg mt-3" type="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <div className="mt-4">
+                        <Label htmlFor="password">Password</Label>
+                        <Input
+                            type="password"
+                            placeholder="Password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
                     </div>
-                    <div className="w-full flex justify-center">
-                        <input className="bg-[#4A4A4A] w-1/2 font-mono p-2 rounded-lg mt-3" type="text" name="rollno" placeholder="Roll number" value={rollno} onChange={(e) => setRollno(e.target.value)} required/>
+                    <div className="mt-4">
+                        <Label htmlFor="rollno">Roll Number</Label>
+                        <Input
+                            type="text"
+                            placeholder="Roll Number"
+                            id="rollno"
+                            value={rollno}
+                            onChange={(e) => setRollno(e.target.value)}
+                        />
                     </div>
-                    <div className="w-full flex justify-center">
-                        <input className="bg-[#4A4A4A] w-1/2 font-mono p-2 rounded-lg mt-3" type="text" name="mobileno" placeholder="Mobile Number" value={mobileno} onChange={(e) => setMobileno(e.target.value)} required />
+                    <div className="mt-4">
+                        <Label htmlFor="mobileno">Mobile Number</Label>
+                        <Input
+                            type="text"
+                            placeholder="Mobile Number"
+                            id="mobileno"
+                            value={mobileno}
+                            onChange={(e) => setMobileno(e.target.value)}
+                        />
                     </div>
-                    <div className="w-full flex justify-center">
-                        <input className="bg-[#4A4A4A] w-1/2 font-mono p-2 rounded-lg mt-3" type="text" name="linkedin" placeholder="LinkedIn Link" value={linkedin} onChange={(e) => setLinkedin(e.target.value)} />
+                    <div className="mt-4">
+                        <Label htmlFor="linkedin">LinkedIn Profile</Label>
+                        <Input
+                            type="url"
+                            placeholder="LinkedIn URL"
+                            id="linkedin"
+                            value={linkedin}
+                            onChange={(e) => setLinkedin(e.target.value)}
+                        />
                     </div>
-                    <select name="user_type" className="bg-[#4A4A4A] p-1 mt-3 rounded-lg">
-                        <option value="student" defaultChecked>Student</option>
-                        <option value="faculty">Faculty</option>
-                    </select>
-                    <button className="mt-2 px-2 py-1" onClick={handleLogin}>Already have an account?</button>
-                    <div>
-                        <button className="border rounded-lg px-4 py-2 text-xl transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-opacity-50 hover:bg-white duration-300 mt-4" type="submit">Register</button>
+                    <div className="mt-4">
+                        <Label htmlFor="role">Role</Label>
+                        <select value={role} onValueChange={setRole} id="role">
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                        </select>
                     </div>
-                    {error && <p className="text-red-500 mt-2">{error}</p>}
+                    <div className="flex items-baseline justify-between mt-6">
+                        <Button type="submit" className="mt-4">Register</Button>
+                    </div>
                 </form>
+                <div className="mt-4 text-center">
+                    <p className="text-sm">
+                        Already have an account?{" "}
+                        <span onClick={handleLogin} className="text-blue-500 cursor-pointer">Login</span>
+                    </p>
+                </div>
             </div>
-        </main>
+        </div>
     );
 }
-
