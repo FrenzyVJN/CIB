@@ -8,6 +8,8 @@ const pb = new PocketBase('https://cib.pockethost.io');
 export default function Home() {
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
+  const [id, setId] = useState("");
+  const [profile, setProfile] = useState("");
   useEffect(() => {
     const onLoad = async () => {
       try {
@@ -32,7 +34,7 @@ export default function Home() {
       <p className="text-xl text-center mb-8 max-w-2xl">
         Connect with internship opportunities and campus collaborations to kickstart your career.
       </p>
-      {pb.authStore.model.id === undefined ? (
+      {id === "" ? (
       <div className="flex space-x-4">
         <Link href="/register">
           <Button size="lg">Sign Up</Button>
