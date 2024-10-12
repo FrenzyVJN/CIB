@@ -1,7 +1,21 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import Pocketbase from 'pocketbase';
+
+const pb = new Pocketbase('https://cib.pockethost.io');
 
 export default function MainNav() {
+  
+  const LogOut = async () => {
+    try {
+      pb.authStore.clear();
+      console.log("Logged out");
+      alert("Logged out successfully!");
+    } catch (e) {
+      console.error("An error occurred:", e);
+      alert("An error occurred. Please try again later.");
+    }
+  }
   return (
     <header className="bg-white shadow-sm">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +32,7 @@ export default function MainNav() {
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            <Button variant="ghost">Log out</Button>
+            <Button onClick={LogOut} variant="ghost">Log out</Button>
           </div>
         </div>
       </nav>

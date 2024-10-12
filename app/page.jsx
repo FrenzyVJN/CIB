@@ -47,7 +47,7 @@ export default function Home() {
           <Button size="lg">Dashboard</Button>
         </Link>
         <Link href="/profile">
-          <Button size="lg" variant="outline">Log Out</Button>
+          <Button size="lg" variant="outline">Profile</Button>
         </Link>
       </div>)}
       <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
