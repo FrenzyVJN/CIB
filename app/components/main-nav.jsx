@@ -27,8 +27,8 @@ export default function MainNav() {
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <NavLink href="/internships">Internships</NavLink>
               <NavLink href="/dashboard">Dashboard</NavLink>
-              <NavLink href="/coming-soon">Collaborations</NavLink>
-              <NavLink href="/coming-soon">Messages</NavLink>
+              {/* <NavLink href="/coming-soon">Collaborations</NavLink>
+              <NavLink href="/coming-soon">Messages</NavLink> */}
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
