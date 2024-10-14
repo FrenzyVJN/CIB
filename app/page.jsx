@@ -13,6 +13,8 @@ export default function Home() {
   useEffect(() => {
     const onLoad = async () => {
       try {
+      console.log(pb.authStore.model.id);
+      setId(pb.authStore.model.id);
       const authData = await pb.collection('users').authRefresh();
       setUser(pb.authStore.model.id);
       setEmail(pb.authStore.model.email);
