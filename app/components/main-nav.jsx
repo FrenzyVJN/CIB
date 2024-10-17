@@ -1,11 +1,26 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Pocketbase from 'pocketbase';
+import { useEffect, useState } from 'react';
 
 const pb = new Pocketbase('https://cib.pockethost.io');
 
 export default function MainNav() {
-  
+  const [id, setId] = useState("");
+  useEffect(() => {
+    const onLoad = async () => {
+      try {
+        console.log(pb.authStore.model.id);
+        await pb.collection('users').authRefresh();
+        setId(pb.authStore.model.id);
+      } catch (err) {
+        // window.open("/login", "_self");
+        console.log(err);
+      }
+    }
+    onLoad();
+  }, []);
+
   const LogOut = async () => {
     try {
       pb.authStore.clear();
@@ -31,9 +46,21 @@ export default function MainNav() {
               <NavLink href="/coming-soon">Messages</NavLink> */}
             </div>
           </div>
+          {id !== "" ? (
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             <Button onClick={LogOut} variant="ghost">Log out</Button>
+          </div>)
+          :(
+          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+            <Link href="/login">
+              <Button variant="ghost">Log in</Button>
+            </Link>
+            <Link href="/register">
+              <Button>Sign up</Button>
+            </Link>
           </div>
+            )
+          }
         </div>
       </nav>
     </header>

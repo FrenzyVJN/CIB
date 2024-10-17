@@ -4,11 +4,37 @@ import MainNav from '@/app/components/main-nav'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import Pocketbase from 'pocketbase'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const pb = new Pocketbase('https://cib.pockethost.io');
 
 export default function Dashboard() {
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  const [id, setId] = useState("");
+  const [profile, setProfile] = useState("");
+  useEffect(() => {
+    const onLoad = async () => {
+      try {
+      if (pb.authStore.model.id === null) {
+        window.location.href = "/login";
+      }
+      setId(pb.authStore.model.id);
+      const authData = await pb.collection('users').authRefresh();
+      setUser(pb.authStore.model.id);
+      setEmail(pb.authStore.model.email);
+      console.log("Logged in as:", authData);
+      console.log(pb.authStore.model.verified)
+      const response = await pb.collection('users').getOne(user);
+      console.log("Profile fetched:", response);          
+      setProfile(response);
+      }
+      catch(err){
+          console.log("");
+      }
+  };
+    onLoad();
+  }, [user, email]);
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white">
       <MainNav />
@@ -28,21 +54,21 @@ export default function Dashboard() {
 
           <Card className="transition-transform transform hover:scale-105 shadow-lg">
             <CardHeader>
-              <CardTitle>Campus Collaborations</CardTitle>
+              <CardTitle>Job Posts</CardTitle>
               <CardDescription>Explore research projects and startup initiatives</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button onClick={() => window.open('/coming-soon')} variant="outline">View Collaborations</Button>
+              <Button onClick={() => window.open('/internships')} variant="outline">View Opportunities</Button>
             </CardContent>
           </Card>
 
           <Card className="transition-transform transform hover:scale-105 shadow-lg">
             <CardHeader>
-              <CardTitle>Messages</CardTitle>
-              <CardDescription>Communicate with employers and collaborators</CardDescription>
+              <CardTitle>Recruit Talent</CardTitle>
+              <CardDescription>Create job opportunities and hire individuals for your startups and research initiatives</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button onClick={() => window.open('/coming-soon')} variant="outline">View Messages</Button>
+              <Button onClick={() => window.open('/post')} variant="outline">Create Opportunities</Button>
             </CardContent>
           </Card>
 

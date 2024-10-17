@@ -25,7 +25,7 @@ export default function Home() {
       setProfile(response);
       }
       catch(err){
-          console.log("");
+          // console.log(err);
       }
   };
     onLoad();

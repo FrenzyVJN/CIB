@@ -24,6 +24,14 @@ export default function RegisterPage() {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        // if (password.length < 8) {
+        //     setError("Password must be at least 8 characters long.");
+        //     return;
+        // }
+        // if (mobileno.length !== 10) {
+        //     setError("Mobile number must be 10 digits long.");
+        //     return;
+        // }   
         const data = {
             username,
             email,
@@ -37,6 +45,7 @@ export default function RegisterPage() {
         };
 
         try {
+            document.getElementById("register").disabled = true;
             console.log("Registering...");
             const record = await pb.collection('users').create(data);
             console.log("Registered successfully");
@@ -44,6 +53,7 @@ export default function RegisterPage() {
             console.log("Logged in successfully");
             window.open("/", "_self");
         } catch (err) {
+            document.getElementById("register").disabled = false;
             setError(err.message); // Set the error message if registration fails
             console.error(err);
         }
@@ -126,7 +136,7 @@ export default function RegisterPage() {
                         </select>
                     </div>
                     <div className="flex items-baseline justify-between mt-6">
-                        <Button type="submit" className="mt-4">Register</Button>
+                        <Button type="submit" id="register" className="mt-4">Register</Button>
                     </div>
                 </form>
                 <div className="mt-4 text-center">

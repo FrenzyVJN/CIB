@@ -35,6 +35,7 @@ export default function PostsPage() {
     }, []);
 
     const handleApply = async (postId, count, candidates) => {
+        try{
         if (pb.authStore.model.verified) {
             candidates = candidates || {};
     
@@ -61,6 +62,9 @@ export default function PostsPage() {
             }
         } else {
             alert("Please verify your account to apply for the job");
+        }}
+        catch(err){
+            alert("Please Login to apply");
         }
     };
 

@@ -15,6 +15,7 @@ export default function LoginPage() {
         e.preventDefault();
         console.log("Logging in...");
         try{
+        document.getElementById("login").disabled = true;
         const authData = await pb.collection('users').authWithPassword(
             email,
             password,
@@ -23,7 +24,8 @@ export default function LoginPage() {
         window.open("/", "_self");
         }
         catch(err){
-            console.log(err);
+          document.getElementById("login").disabled = false;
+          console.log(err);
             console.log("Login failed");
         }
     }
@@ -35,7 +37,6 @@ export default function LoginPage() {
             <div className="mt-4">
               <Label htmlFor="email">Email</Label>
               <Input
-                type="email"
                 placeholder="Email"
                 id="email"
                 value={email}
@@ -55,7 +56,12 @@ export default function LoginPage() {
               />
             </div>
             <div className="flex items-baseline justify-between">
-              <Button type="submit" className="mt-4">Login</Button>
+              <Button type="submit" id="login" className="mt-4">Login</Button>
+            </div>
+            <div className="mt-4 text-center">
+              <Link href="/register">
+                <div className="text-blue-500">Create an account</div>
+              </Link>
             </div>
           </form>
         </div>
