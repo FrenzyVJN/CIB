@@ -16,6 +16,11 @@ export default function Dashboard() {
   useEffect(() => {
     const onLoad = async () => {
       try {
+      if (!pb.authStore.isValid) {
+        window.location.href = "/login";
+        return;
+      }  
+      console.log(id);
       if (pb.authStore.model.id === null) {
         window.location.href = "/login";
       }

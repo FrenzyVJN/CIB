@@ -10,12 +10,12 @@ export default function MainNav() {
   useEffect(() => {
     const onLoad = async () => {
       try {
-        console.log(pb.authStore.model.id);
+        setId(pb.authStore.model.id);
+        console.log(id);
         await pb.collection('users').authRefresh();
         setId(pb.authStore.model.id);
       } catch (err) {
-        // window.open("/login", "_self");
-        console.log(err);
+        // console.log(err);
       }
     }
     onLoad();
