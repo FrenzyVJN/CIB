@@ -21,7 +21,7 @@ export default function Dashboard() {
         return;
       }  
       console.log(id);
-      if (pb.authStore.model.id === null) {
+      if (!pb.authStore.model || pb.authStore.model.id === null) {
         window.location.href = "/login";
       }
       setId(pb.authStore.model.id);
