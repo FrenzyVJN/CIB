@@ -6,7 +6,7 @@ import Link from "next/link";
 import PocketBase from 'pocketbase';
 import { verify } from "crypto";
 
-const pb = new PocketBase('https://cib.pockethost.io');
+const pb = new PocketBase('http://4.247.129.140');
 export default function NavBar (){
 
   useEffect(() => {

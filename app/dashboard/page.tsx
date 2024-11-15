@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import Pocketbase from 'pocketbase'
 import { useEffect, useState } from 'react'
 
-const pb = new Pocketbase('https://cib.pockethost.io');
+const pb = new Pocketbase('http://4.247.129.140');
 
 export default function Dashboard() {
   const [user, setUser] = useState("");
@@ -24,7 +24,8 @@ export default function Dashboard() {
       if (!pb.authStore.model || pb.authStore.model.id === null) {
         window.location.href = "/login";
       }
-      setId(pb.authStore.model.id);
+      if (pb.authStore.model) {
+        setId(pb.authStore.model.id);
       const authData = await pb.collection('users').authRefresh();
       setUser(pb.authStore.model.id);
       setEmail(pb.authStore.model.email);
@@ -32,7 +33,8 @@ export default function Dashboard() {
       console.log(pb.authStore.model.verified)
       const response = await pb.collection('users').getOne(user);
       console.log("Profile fetched:", response);          
-      setProfile(response);
+
+      }
       }
       catch(err){
           console.log("");
