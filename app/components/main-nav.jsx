@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import Pocketbase from 'pocketbase';
 import { useEffect, useState } from 'react';
 
-const pb = new Pocketbase('http://4.247.129.140');
+const pb = new Pocketbase('https://4.247.129.140');
 
 export default function MainNav() {
   const [id, setId] = useState("");
