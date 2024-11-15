@@ -4,7 +4,7 @@ import NavBar from "../components/main-nav"; // Update this path if needed
 import PocketBase from 'pocketbase';
 import { Button } from '@/components/ui/button';
 
-const pb = new PocketBase('https://cib.pockethost.io');
+const pb = new PocketBase('http://4.247.129.140');
 
 export default function PostsPage() {
     const [posts, setPosts] = useState([]);

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import PocketBase from 'pocketbase';
 
-const pb = new PocketBase('https://cib.pockethost.io');
+const pb = new PocketBase('http://4.247.129.140');
 
 export default function RegisterPage() {
     const [email, setEmail] = useState("");

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { use, useEffect } from 'react'
 import PocketBase from 'pocketbase'
 import { useState } from 'react'
-const pb = new PocketBase('https://cib.pockethost.io');
+const pb = new PocketBase('http://4.247.129.140');
 export default function Home() {
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
