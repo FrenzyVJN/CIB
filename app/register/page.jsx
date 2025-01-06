@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
 
-const pb = new Pocketbase('https://4.247.129.140/');
+const pb = new Pocketbase('https://cib.pockethost.io/');
 
 export default function RegisterPage() {
     const [username, setUsername] = useState("");

@@ -5,7 +5,7 @@ import PocketBase from 'pocketbase';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-const pb = new PocketBase('https://4.247.129.140');
+const pb = new PocketBase('https://cib.pockethost.io');
 
 
 export default function LoginPage() {

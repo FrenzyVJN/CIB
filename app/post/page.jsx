@@ -4,7 +4,7 @@ import { useState } from "react";
 import PocketBase from 'pocketbase';
 import NavBar from "../components/main-nav"; // Use main navigation
 
-const pb = new PocketBase('https://4.247.129.140');
+const pb = new PocketBase('https://cib.pockethost.io');
 
 export default function RegisterPage() {
     const [author, setAuthor] = useState('');

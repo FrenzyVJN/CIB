@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import Pocketbase from 'pocketbase'
 import { useEffect, useState } from 'react'
 
-const pb = new Pocketbase('https://4.247.129.140');
+const pb = new Pocketbase('https://cib.pockethost.io');
 
 export default function Dashboard() {
   const [user, setUser] = useState("");
